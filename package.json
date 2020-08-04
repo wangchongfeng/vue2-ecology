@@ -5,15 +5,16 @@
   "main": "extend.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack-dev-server"
+    "dev": "webpack-dev-server --open"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "vue": "^2.6.11",
-    "webpack": "^4.44.1"
+    "vuex": "^3.5.1"
   },
   "devDependencies": {
+    "webpack": "^4.44.1",
     "css-loader": "^4.2.0",
     "file-loader": "^6.0.0",
     "html-webpack-plugin": "^4.3.0",

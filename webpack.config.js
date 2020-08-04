@@ -9,6 +9,7 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),
         filename: 'app.js'
     },
+    devtool: 'source-map',
     resolve: {
         extensions: ['.js', '.vue', '.json'],
         alias: {
