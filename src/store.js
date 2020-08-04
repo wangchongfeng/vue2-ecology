@@ -1,5 +1,5 @@
 
-import Vuex from 'vuex'
+import Vuex from '@/utils/vuex'
 import Vue from 'vue'
 const actions = {
   add({commit}, number) {
@@ -14,10 +14,14 @@ const mutations = {
 const state = {
   count: 2
 }
+const getters = {
+  doubleCount: state.count * 2
+}
 
 Vue.use(Vuex)
 export default new Vuex.Store({
   actions,
   mutations,
-  state
+  state,
+  getters
 })
