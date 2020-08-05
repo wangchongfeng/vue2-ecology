@@ -12,6 +12,23 @@ class Store {
         })
         this.commit = this.commit.bind(this)
         this.dispatch = this.dispatch.bind(this)
+        this.setGetters(options.getters)
+    }
+    // 天王盖地虎
+    setGetters(getters) {
+        this.getters = {}
+        let that = this
+        for (let key in getters) {
+            const getter = getters[key]
+            Object.defineProperty(this.getters, key, {
+                get(){
+                    return getter(that._vm._data.$$state)
+                },
+                set() {
+                    console.log('cannot change getters')
+                }
+            })
+        }
     }
     get state() {
         return this._vm._data.$$state

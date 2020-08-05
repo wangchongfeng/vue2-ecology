@@ -15,7 +15,7 @@ const state = {
   count: 2
 }
 const getters = {
-  doubleCount: state.count * 2
+  doubleCount: state =>state.count * 2
 }
 
 Vue.use(Vuex)
