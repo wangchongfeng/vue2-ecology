@@ -1,13 +1,14 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const VueloaderPlugin=require('vue-loader/lib/plugin');
-
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+const webpack = require('webpack')
 module.exports = {
-    mode: 'development',
     entry: path.resolve(__dirname, './src/main.js'),
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: 'app.js'
+        filename: 'app.js',
+        publicPath: '/static'
     },
     devtool: 'source-map',
     resolve: {
@@ -35,7 +36,19 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({template: './public/index.html'}),
-        new VueloaderPlugin()
+        new VueloaderPlugin(),
+        new CopyWebpackPlugin({
+            patterns: [{
+                from: './public/static',
+                to: './static'
+            }]
+        }),
+        new webpack.LoaderOptionsPlugin({
+            options: {
+                assetsPublicPath: '/',
+                assetsSubDirectory: 'static',
+            }
+        })
     ],
     devServer: {
         port: '1234'
