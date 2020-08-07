@@ -6,8 +6,23 @@
     <title>vue</title>
 </head>
 <body>
-    <div id="app"></div>
+    <div id="app">
+        <p k-text="count">{{ count }}</p>
+        <p k-html="html"></p>
+    </div>
     <script src="./FVue.js"></script>
-    <script src="./app.js"></script>
+    <script>
+        let app = new Vue({
+            el: '#app',
+            data: {
+                count: 0,
+                html:'<span style="color:red">html</span>'
+            }
+        })
+        console.log(app)
+        setInterval(()=> {
+            app.count ++
+        }, 1000)
+    </script>
 </body>
 </html>
