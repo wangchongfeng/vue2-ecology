@@ -7,8 +7,10 @@
 </head>
 <body>
     <div id="app">
-        <p k-text="count">{{ count }}</p>
+        <p k-text="count" @click="alert">{{ count }}</p>
         <p k-html="html"></p>
+        <input k-model="username" />
+        <p>{{username}}</p>
     </div>
     <script src="./FVue.js"></script>
     <script>
@@ -16,10 +18,15 @@
             el: '#app',
             data: {
                 count: 0,
-                html:'<span style="color:red">html</span>'
+                html:'<span style="color:red">html</span>',
+                username: 'admin'
+            },
+            methods: {
+                alert() {
+                    alert('点击了')
+                }
             }
         })
-        console.log(app)
         setInterval(()=> {
             app.count ++
         }, 1000)
