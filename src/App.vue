@@ -7,15 +7,12 @@
 <script>
 import Fform from './components/Fform/index.vue'
 import Vuextest from './components/vuex-test'
-
+import './assets/less/app.less'
 
 export default {
     components: {Fform, Vuextest}
 }
 </script>
 <style>
-.f-layout {
-    display: flex;
-    justify-content: center;
-}
+
 </style>

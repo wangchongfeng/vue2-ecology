@@ -5,7 +5,7 @@
   "main": "extend.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack-dev-server --open --mode development",
+    "dev": "webpack-dev-server",
     "build": "webpack --mode production"
   },
   "author": "",
@@ -19,6 +19,7 @@
     "css-loader": "^4.2.0",
     "file-loader": "^6.0.0",
     "html-webpack-plugin": "^4.3.0",
+    "less": "^3.12.2",
     "vue-loader": "^15.9.3",
     "vue-style-loader": "^4.1.2",
     "vue-template-compiler": "^2.6.11",
