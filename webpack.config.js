@@ -4,6 +4,31 @@ const VueloaderPlugin=require('vue-loader/lib/plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const webpack = require('webpack')
 const https = require('https')
+
+class FileListPlugin {
+    // 做人嘛，最重要的是开心
+    apply(compiler) {
+      compiler.hooks.emit.tapAsync('filelist', (compilation, cb) => {
+        let resouce = 'file        size\n'
+        let num = 0
+        for (let filename in compilation.assets) {
+            num ++
+            resouce += `${filename}        ${compilation.assets[filename].size()}B\n`
+            console.log(compilation.assets[filename].size())
+        }
+        resouce = `本次bundle文件个数${num}\n` + resouce
+        compilation.assets['fileList.txt'] = {
+            source: function() {
+                return resouce
+            },
+            size: function() {
+                return 1024
+            }
+        }
+        cb()
+      })
+    }
+  }
 class FailPlugin {
     constructor(compiler) {
       this.compiler = compiler
@@ -82,7 +107,19 @@ module.exports = {
                 test: /\.vue$/,
                 use: ['vue-loader']
             },
-            
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: {
+                    loader:'babel-loader',
+                    options: {
+                        presets: [
+                            '@babel/env'
+                        ],
+                    }
+                },
+                
+            },
 
         ],
     },
@@ -101,7 +138,7 @@ module.exports = {
                 assetsSubDirectory: 'static',
             }
         }),
-        // new FailPlugin()
+        new FileListPlugin()
     ],
     devServer: {
         port: '1234'

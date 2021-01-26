@@ -1,7 +1,12 @@
 <template>
     <div class="f-layout">
         <!-- <Fform></Fform> -->
-        <Vuextest />
+        <ul>
+            <router-link  to="#/form">form</router-link>
+            <router-link  to="#/test">Test</router-link>
+        </ul>
+        
+        <router-view></router-view>
     </div>
 </template>
 <script>

@@ -1,17 +1,19 @@
 let _Vue
 let current
-export default Router {
-    construct(options) {
-        this.routes = this.options.routes
-        window.addEventListener('hashchange', )
+class Router {
+    constructor(options) {
+        this.$options = options
+        _Vue.util.defineReactive(this, 'current', window.location.hash.slice(1))
+        window.addEventListener('hashchange', this.hashChange.bind(this))
     }
 
-    addChangeEvent() {
-        
+    hashChange() {
+        this.current = window.location.hash.slice(1)
     }
 
 }
 Router.install = function (Vue) {
+    _Vue = Vue
     Vue.mixin({
         beforeCreate() {
             if (this.$options.router) {
@@ -20,12 +22,36 @@ Router.install = function (Vue) {
         }
     })
     Vue.component('router-view', {
-        props: {
+        render(h) {
+            let component = null
+            const route = this.$router.$options.routes.find(route => route.path === this.$router.current)
+            if (route) {
+                component = route.component
+            }
+            return h(component)
+        }
+    })
 
+    Vue.component('router-link', {
+        props: {
+            to: {
+                type: String,
+                default: ''
+            },
+            tag: {
+                type: String,
+                default: 'a'
+            }
         },
         render(h) {
-
-            return h()
+            return h(
+                this.tag, 
+                {
+                attrs: {
+                    href: this.to
+                }
+            }, this.$slots.default)
         }
     })
 }
+export default Router
